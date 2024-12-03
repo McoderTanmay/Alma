@@ -41,6 +41,14 @@ const userSchema = mongoose.Schema(
         profle:{
             type: String,
         },
+        forum:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Forum",
+        },
+        post:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post",
+        }
     }
 )
 
