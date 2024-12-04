@@ -25,6 +25,10 @@ const userSchema = mongoose.Schema(
             type: String,
             require: true
         },
+        rollNo:{
+            type: String,
+            require: true
+        },
         email:{
             type: String,
             require: true
