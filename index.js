@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const USER_ROUTER = require('./routers/userRouters');
-
+const forumRouters = require('./routers/forumRouters');
 require('dotenv').config();
 app.use(express.json());
 app.use(cors());
@@ -22,6 +22,8 @@ async function connect(){
         console.log(error);
     }
 }
+
+app.use("/api/discussionforum",forumRouters)
 
 connect();
 app.listen(5000,()=>{
