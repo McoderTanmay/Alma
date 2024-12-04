@@ -2,12 +2,17 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const USER_ROUTER = require('./routers/userRouters');
 
 require('dotenv').config();
 app.use(express.json());
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 
 const uri = process.env.MONGODBURI;
+
+//routes
+app.use("/api/user", USER_ROUTER);
 
 async function connect(){
     try {
