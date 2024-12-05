@@ -8,22 +8,21 @@ require('dotenv').config();
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-
 const uri = process.env.MONGODBURI;
 
 //routes
 app.use("/api/user", USER_ROUTER);
+app.use("/api/discussionforum",forumRouters);
+
 
 async function connect(){
     try {
-        await mongoose.connect(uri);
+        await mongoose.connect(`${uri}/aludent`);
         console.log("Connected to database");
     } catch (error) {
         console.log(error);
     }
 }
-
-app.use("/api/discussionforum",forumRouters)
 
 connect();
 app.listen(5000,()=>{
