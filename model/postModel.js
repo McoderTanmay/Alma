@@ -16,16 +16,16 @@ const postModel = mongoose.Schema(
         likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
         comments: [
             {
-                userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // User who commented
-                content: { type: String, required: true }, // Comment content
-                createdAt: { type: Date, default: Date.now }, // Timestamp for the comment
-                isDeleted: { type: Boolean, default: false } // Soft delete for comments
+                authorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, 
+                content: { type: String, required: true }, 
+                createdAt: { type: Date, default: Date.now }, 
+                isDeleted: { type: Boolean, default: false } 
             }
         ],
         tags: [{ type: String }],
         shares: [
             {
-                userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // User who shared
+                userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // User who shared
                 createdAt: { type: Date, default: Date.now } // Timestamp for the share
             }
         ],

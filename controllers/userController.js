@@ -60,8 +60,9 @@ module.exports = {
       if (!isMatch) {
         return res.status(400).json({ message: "Invalid Password" });
       }
-
-      const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" });
+      const userId = user._id;
+      const token = jwt.sign({ userId }, JWT_SECRET, { expiresIn: "24h" });
+      res.cookie("token",token);
       return res.status(200).json({ token });
     } catch (error) {
       return res
