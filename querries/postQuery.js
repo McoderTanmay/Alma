@@ -4,8 +4,8 @@ module.exports = {
     async create(body){
         return await post.create(body);
     },
-    async getPosts(id){
-        return await post.find({userId:id});
+    async getPosts(){
+        return await post.find({});
     },
     async deletePost(id){
         return await post.deleteOne({_id:id});

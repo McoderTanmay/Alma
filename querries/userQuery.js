@@ -5,6 +5,6 @@ module.exports = {
         return await user.create(body);
     },
     async findUserByRollNo(data){
-        return await user.find({rollNo: data});
+        return await user.findOne({rollNo: data});
     }
 }
