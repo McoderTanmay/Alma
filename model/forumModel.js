@@ -10,9 +10,9 @@ const forumSchema = new mongoose.Schema({
   title: { type: String, required: true, trim: true },
   content: { type: String, required: true },
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  tags: [{ type: String }], // Array of tags
+  tags: [{ type: String }], 
   timestamp: { type: Date, default: Date.now },
-  upvotes: { type: Number, default: 0 }
+  upvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] 
 });
 
 
