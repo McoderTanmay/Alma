@@ -1,0 +1,125 @@
+.welcome-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .Parent1{
+    display: flex;
+
+  }
+  
+  .welcome-content {
+    flex: 1;
+    max-width: 60%;
+  }
+  
+  .welcome-content h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  
+  .signin-button {
+    background-color: white;
+    border: 2px solid #333;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .signin-button:hover {
+    background-color: #333;
+    color: white;
+  }
+  
+  .info-text {
+    font-size: 14px;
+    color: #777;
+    margin-top: 15px;
+  }
+  
+  .info-text .link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .info-text .link:hover {
+    text-decoration: underline;
+  }
+  
+  .new-user {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #333;
+  }
+  
+  .new-user .join-now {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .new-user .join-now:hover {
+    text-decoration: underline;
+  }
+  
+ 
+  .welcome-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    /* position: relative; /* Establish a relative positioning context */
+    /*width: 100%; /* Adjust based on your design */
+    /*height: 500px;  */
+  }
+  
+  .girl-image {
+    /* max-width: 100%;
+    height: 27rem;
+    margin-left: 20px;
+    border-radius: 10px; */
+    position: absolute; 
+    right: 1%; 
+    bottom: 0; 
+    width: 280px; 
+    z-index: 2; 
+    border-radius: 10%; 
+  }
+  .green-image{
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    z-index: 1; 
+  }
+  
+  
+  .welcome-section::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: url("C:\Users\hp\OneDrive\Desktop\FrontEnd\aludent\public\Greenbg1.png") no-repeat bottom left;
+    background-size: cover;
+    z-index: -1;
+  }
+  

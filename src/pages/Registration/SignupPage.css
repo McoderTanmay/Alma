@@ -1,0 +1,168 @@
+.signup-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(145deg, #80a6f7, #e3dede); 
+    margin: 0;
+  }
+  
+  
+  .signup-container {
+    background: #ffffff;
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    
+  }
+  
+  
+  .platform-name {
+    font-family: "Poppins", sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #151515; 
+    margin-bottom: 10px;
+  }
+  .platform-name  span{ 
+    color: rgb(4, 107, 180);}
+  
+  
+  .signup-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #070114; 
+    margin: 10px 0;
+  }
+  
+
+  .signup-subtitle {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    color: #888888; 
+    margin-bottom: 20px;
+  }
+  
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-field {
+    width: 88%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    background: #f9f9f9; 
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border: 1px solid #79f82a;
+  }
+  
+  
+  .signup-button,
+  .enrollment-button,
+  .google-button {
+    width: 100%;
+    padding: 12px;
+    background: #7ded4c; 
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .signup-button:hover,
+  .enrollment-button:hover {
+    background: #7ded4c; 
+  }
+  
+  
+  .google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    color: #333333;
+    border: 1px solid #ddd;
+    margin-top: 15px;
+  }
+  
+  .google-button:hover {
+    background: #f7f7f7;
+  }
+  
+  .google-logo {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+  }
+  
+  
+  .upload-group {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .upload-label {
+    display: block;
+    font-size: 14px;
+    color: #333333;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .upload-input {
+    width: 88;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    background: #f9f9f9;
+  }
+  
+  /* Or Divider */
+  .or-divider {
+    margin: 15px 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    color: #888888;
+  }
+  
+  /* Login Link */
+  .login-link {
+    margin-top: 15px;
+  }
+  
+  .login-link p {
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    color: #888888;
+  }
+  
+  .login-link a {
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    color: #7ded4c;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+  

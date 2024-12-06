@@ -1,0 +1,79 @@
+.landing-page2-container {
+    background-color: #f0f0f0;
+    padding: 20px 40px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .landing-page2-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .landing-page2-section {
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  .logo h2 {
+    font-size: 24px;
+    color: #333;
+  }
+  .logo h2 span{
+    color:rgb(4, 107, 180);
+  }
+  .landing-page2-section h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .landing-page2-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .landing-page2-section ul li {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .landing-page2-section ul li:hover {
+    text-decoration: underline;
+  }
+  
+  .landing-page2-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .landing-page2-bottom p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .landing-page2-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 5px;
+  }
+  
+  .landing-page2-links li {
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  
+  .landing-page2-links li:hover {
+    text-decoration: underline;
+  }
+  
