@@ -5,7 +5,7 @@ module.exports = {
         return await post.create(body);
     },
     async getPosts(){
-        return await post.find({});
+        return await post.find({}).sort({ createdAt: -1 });
     },
     async deletePost(id){
         return await post.deleteOne({_id:id});
