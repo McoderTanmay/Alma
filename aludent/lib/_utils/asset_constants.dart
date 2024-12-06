@@ -1,0 +1,30 @@
+class AssetConstants {
+  static String aiAssist = "assets/ai-assist.jpg";
+  static String chevron = "D:/Samast/Alma/aludent/assets/chevron.png";
+  static String close = "D:/Samast/Alma/aludent/assets/close.png";
+  static String comment = "D:/Samast/Alma/aludent/assets/comment.png";
+  static String complete = "D:/Samast/Alma/aludent/assets/complete.png";
+  static String conference = "D:/Samast/Alma/aludent/assets/conference.png";
+  static String connectPeople = "assets/connect-people.jpg";
+  static String create = "D:/Samast/Alma/aludent/assets/create.png";
+  static String discussion = "D:/Samast/Alma/aludent/assets/discussion.png";
+  static String discussions = "assets/discussions.jpg";
+  static String editing = "D:/Samast/Alma/aludent/assets/editing.png";
+  static String expandArrows = "D:/Samast/Alma/aludent/assets/expand-arrows.png";
+  static String eyeClose = "D:/Samast/Alma/aludent/assets/eye-close.png";
+  static String eyeOpen = "D:/Samast/Alma/aludent/assets/eye-open.png";
+  static String facebook = "D:/Samast/Alma/aludent/assets/facebook.png";
+  static String filter = "D:/Samast/Alma/aludent/assets/filter.png";
+  static String forums = "assets/forums.jpg";
+  String home = "D:/Samast/Alma/aludent/assets/home.png";
+  static String image = "assets/image.jpg";
+  String like = "D:/Samast/Alma/aludent/assets/like.png";
+  String magicWand = "D:/Samast/Alma/aludent/assets/magic-word.png";
+  String more = "D:/Samast/Alma/aludent/assets/more.png";
+  String notification = "D:/Samast/Alma/aludent/assets/notification.png";
+  String people = "D:/Samast/Alma/aludent/assets/people.png";
+  String profile = "D:/Samast/Alma/aludent/assets/profile.png";
+  String send = "D:/Samast/Alma/aludent/assets/send.png";
+  String setting = "D:/Samast/Alma/aludent/assets/setting.png";
+  String upload = "D:/Samast/Alma/aludent/assets/upload.png";
+}
