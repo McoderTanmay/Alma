@@ -64,6 +64,7 @@ module.exports = {
         return res.status(401).json({ message: "Invalid Password" });
       }
 
+
       const userId = user._id;
       const token = jwt.sign({ userId }, JWT_SECRET, { expiresIn: "24h" });
 
@@ -71,6 +72,7 @@ module.exports = {
         message: "Login successful",
         token, // Return the token
       });
+
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
