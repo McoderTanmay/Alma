@@ -1,0 +1,28 @@
+
+          {/* Buttons */}
+          
+          <button className="w-full bg-teal-100 text-teal-700 py-2 px-4 rounded-lg hover:bg-teal-200">
+            Create a Job
+          </button>
+          {/* Job Suggestions */}
+          <div className="mt-6">
+            <h3 className="font-bold text-gray-800 mb-2">
+              Relevant Jobs for you
+            </h3>
+            <ul className="text-sm text-gray-600 space-y-2">
+              <li>Paul Wall is looking for Software Developer</li>
+              <li>Tim Brooks is looking for Flutter Intern</li>
+              <li>Scott Martin is looking for Salesforce Manager</li>
+            </ul>
+            <button className="text-blue-500 mt-4">Explore more Jobs</button>
+          </div>
+          {/* Connections and Settings */}
+          <div className="mt-6">
+            <button className="w-full bg-gray-100 py-2 px-4 rounded-lg mb-4 hover:bg-gray-200">
+              Connections
+            </button>
+            <button className="w-full bg-gray-100 py-2 px-4 rounded-lg hover:bg-gray-200">
+              Settings
+            </button>
+          </div>
+          
