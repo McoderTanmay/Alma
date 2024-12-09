@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
-import join from "../../media/join.png";
 import ChatBot from "../../components/ChatBot";
+import Profile from "./Profile";
+import Post from "./Post";
 
 import MainNavbar from "../../components/MainNav";
 function Feed() {
@@ -21,21 +22,8 @@ function Feed() {
         <div className="w-1/4">
           <aside className=" h-fit rounded-xl bg-white p-4 shadow-lg ms-10 mt-7">
             {/* Profile Card */}
-
-            <div className="flex items-center mb-6">
-              <img
-                src="https://via.placeholder.com/100"
-                alt="Profile"
-                className="w-20 h-20 rounded-full mx-auto"
-              />
-              <div className="p-4">
-                <h2 className="text-start text-lg font-bold mt-4">Jane Doe</h2>
-                <p className="text-start text-gray-500 text-sm">
-                  About Description Lorem Ipsum | Guru Ghasidas University,
-                  Bilaspur
-                </p>
-              </div>
-            </div>
+            <Profile/>
+            
           </aside>
           {!aiClicked && (
             <aside className=" h-fit bg-white rounded-xl shadow-lg ms-10 mt-5">
@@ -68,42 +56,8 @@ function Feed() {
         {/* Feed Section */}
         <main className="w-1/2 p-6">
           {/* Post */}
-          {[1, 2].map((post, index) => (
-            <div
-              key={index}
-              className="bg-white shadow-lg rounded-lg mb-6 overflow-hidden"
-            >
-              <div className="p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <img
-                      src="https://via.placeholder.com/50"
-                      alt="Author"
-                      className="w-10 h-10 rounded-full"
-                    />
-                    <div>
-                      <h4 className="font-bold">Paul Wall</h4>
-                      <p className="text-sm text-gray-500">1h</p>
-                    </div>
-                  </div>
-                  <button className="text-gray-500">...</button>
-                </div>
-                <p className="mt-4 text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-              </div>
-              <img src={join} alt="Post" className="w-full" />
-              <div className="p-4 flex justify-between text-gray-600 text-sm">
-                <span>1268 Likes</span>
-                <span>56 Comments</span>
-              </div>
-              <div className="p-4 flex justify-around text-gray-500 text-sm">
-                <button className="hover:text-black">Like</button>
-                <button className="hover:text-black">Comment</button>
-                <button className="hover:text-black">Share</button>
-              </div>
-            </div>
+          {[1, 2].map(( index) => (
+            <Post key={index}/>
           ))}
         </main>
 
