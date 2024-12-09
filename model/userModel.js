@@ -59,10 +59,12 @@ const userSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "Forum",
         },
-        post: {
+
+        post:[{
+
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post",
-        }
+        }]
     }
 );
 
