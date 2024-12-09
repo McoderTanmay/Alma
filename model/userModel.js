@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const experiance = {
+const experience = {
     companyName:{
         type: String,
     },
@@ -17,48 +17,57 @@ const experiance = {
 
 const userSchema = mongoose.Schema(
     {
-        FullName:{
+        FullName: {
             type: String,
-            require: true
+            required: true
         },
-        universityID:{
+        universityID: {
             type: String,
-            require: true
+            required: true
         },
-        password:{
+        password: {
             type: String,
-            require: true
+            required: true
         },
-        rollNo:{
+        rollNo: {
             type: String,
-            require: true
+            required: true
         },
-        email:{
+        email: {
             type: String,
-            require: true
+            required: true
         },
-        userType:{
+        userType: {
             type: String,
             enum: ['alumni', 'student'],
-            require: true
+            required: true
         },
-        passoutYear:{
+        passoutYear: {
             type: Number,
         },
-        experiance,
-        profle:{
+        experience: {
+            type: String, // Adjust the type as needed
+        },
+        profile: {
             type: String,
         },
-        forum:{
+        profilePic: { // Field for profile picture
+            type: String, // This could be a URL or file path
+            default: '', // Optional: Provide a default image path if necessary
+        },
+        forum: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Forum",
         },
+
         post:[{
+
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post",
         }]
     }
-)
+);
+
 
 const User = mongoose.model("User", userSchema);
 module.exports = User; 

@@ -2,20 +2,49 @@ const postQuery = require("../querries/postQuery");
 const Post = require("../model/postModel")
 
 module.exports = {
-  async createPost(req, res, next) {
-    const user = req.user.userId;
-    const { content, media_url, tags } = req.body;
+  async createPost(req, res) {
+    const user = req.user.userId; // Extract user ID from authenticated request
+    const { content, tags } = req.body; // Destructure content and tags from the request body
+
+    if (!req.file) {
+      return res.status(400).json({
+          code: 400,
+          status: 'Failed',
+          message: 'No file uploaded. Please provide an image.',
+      });
+  }
+  
+   
     try {
-      await postQuery.create({ content, media_url, tags, user });
-      return res.status(200).send({
-        code: 200,
-        status: "Success",
+      // Create a new post with the extracted data
+      const newPost = await Post.create({
+        userId: user,
+        content,
+        images:imageUrl,
+        tags,
+      });
+
+      // Respond with the created post
+      res.status(201).json({
+        code: 201,
+        status: 'Success',
+        post: newPost,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .send({ code: 500, status: "failed", message: error.message });
+      res.status(500).json({
+        code: 500,
+        status: 'Failed',
+        message: error.message,
+      });
     }
+  },
+  async getPostFile(req, res) {
+    const filePath = path.resolve('../utils/postImages', req.params.filename);
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        res.status(404).send({ code: 404, status: 'Failed', message: 'File not found' });
+      }
+    });
   },
   async deletePost(req, res, next) {
     const postId = req.params.id;
@@ -33,9 +62,24 @@ module.exports = {
   },
   async getAllPost(req, res, next) {
     const user = req.user.userId;
-    console.log("usr", user);
     try {
       const posts = await postQuery.getPosts();
+      return res.status(200).send({
+        code: 200,
+        status: "Success",
+        data: posts,
+      });
+    } catch (error) {
+      console.log(error);
+      return res
+        .status(500)
+        .send({ code: 500, status: "failed", message: error.message });
+    }
+  },
+  async getAllUserPosts(req, res) {
+    const userId = req.user.userId;
+    try {
+      const posts = await postQuery.getUserPosts(userId);
       return res.status(200).send({
         code: 200,
         status: "Success",
