@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 
-
-const forumSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-    trim: true,
-  },
+const threadSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
@@ -20,11 +14,11 @@ const forumSchema = new mongoose.Schema({
     enum: ['alumni', 'student'], // Distinguishes the author type
     required: true,
   },
-  tags: [
-    {
-      type: String,
-    },
-  ],
+  forum: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Forum',
+    required: true,
+  },
   timestamp: {
     type: Date,
     default: Date.now,
@@ -39,15 +33,8 @@ const forumSchema = new mongoose.Schema({
       },
     },
   ],
-  threads: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Thread',
-    },
-  ],
 });
 
-const Forum = mongoose.model('Forum', forumSchema);
+const Thread = mongoose.model('Thread', threadSchema);
 
-module.exports = Forum;
-
+module.exports = Thread;
