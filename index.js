@@ -13,6 +13,7 @@ import USER_ROUTER from './routers/userRouters.js';
 import FORUM_ROUTER from './routers/forumRouters.js';
 import POST_ROUTER from './routers/postRouter.js';
 import CHAT_ROUTER from './routers/chatRouters.js';
+import FEED_ROUTER from './routers/feedRouter.js'
 // import CALENDAR_ROUTER from './routers/calendarRouter.js';
 
 import alumniModel from './model/alumniModel.js';
@@ -78,6 +79,7 @@ app.use('/api/user', USER_ROUTER);
 app.use('/api/discussionforum', FORUM_ROUTER);
 app.use('/api/post', POST_ROUTER);
 app.use('/api/chat', CHAT_ROUTER);
+app.use('/api/feed',FEED_ROUTER);
 // app.use('/api/event', CALENDAR_ROUTER);
 
 // Web Sockets

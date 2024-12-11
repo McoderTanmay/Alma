@@ -23,19 +23,42 @@ const storage = (uploadDir) =>
     },
   });
 
-const createMulterUpload = (uploadDir) =>
+const createMulterUpload = (uploadDir, allowedTypes) =>
   multer({
     storage: storage(uploadDir),
-    limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5 MB
+    limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to 10 MB
     fileFilter: (req, file, cb) => {
-      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
       if (allowedTypes.includes(file.mimetype)) {
         cb(null, true);
       } else {
-        cb(new Error('Only JPEG, PNG, and GIF files are allowed!'));
+        cb(new Error(`Only files of type: ${allowedTypes.join(', ')} are allowed!`));
       }
     },
   });
 
-export const postUpload = createMulterUpload('./utils/postImages'); // Relative paths here
-export const profileUpload = createMulterUpload('./utils/profilePictures');
+// Specific configurations for different uploads
+export const postUpload = createMulterUpload('./utils/postImages', [
+  'image/jpeg',
+  'image/png',
+  'image/gif',
+]);
+
+export const profileUpload = createMulterUpload('./utils/profilePictures', [
+  'image/jpeg',
+  'image/png',
+  'image/gif',
+]);
+
+export const alumniDocumentUpload = createMulterUpload('./utils/documents', [
+  // Document MIME types
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  // Image MIME types
+  'image/jpeg',
+  'image/png',
+  'image/gif',
+]);
+
