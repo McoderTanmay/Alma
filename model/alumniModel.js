@@ -60,7 +60,7 @@ const alumniSchema = new Schema(
             ref: 'Post',
         },
         availability: {
-            isAvailable: { type: Boolean, default: false },
+            isConfirm: { type: Boolean, default: false },
             startDate: { type: Date },
             endDate: { type: Date },
             location: { type: String },

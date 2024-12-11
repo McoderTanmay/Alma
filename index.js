@@ -79,7 +79,7 @@ app.use('/api/user', USER_ROUTER);
 app.use('/api/discussionforum', FORUM_ROUTER);
 app.use('/api/post', POST_ROUTER);
 app.use('/api/chat', CHAT_ROUTER);
-app.use('/api/feed',FEED_ROUTER);
+app.use('/api/feed', FEED_ROUTER);
 // app.use('/api/event', CALENDAR_ROUTER);
 
 // Web Sockets

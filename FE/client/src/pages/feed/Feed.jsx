@@ -4,16 +4,59 @@ import { CiSearch } from "react-icons/ci";
 import ChatBot from "../../components/ChatBot";
 import Profile from "./Profile";
 import Post from "./Post";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import MainNavbar from "../../components/MainNav";
+
 function Feed() {
   const [aiClicked, setAiClicked] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+
   const handelAiChatHandler = () => {
     setAiClicked(true);
   };
   const closehandelAiChatHandler = () => {
     setAiClicked(false);
   };
+
+  const handleSubmit = async () => {
+    if (!fromDate || !toDate) {
+      alert("Please select both From and To dates");
+      return;
+    }
+  
+    // Get the Bearer token from local storage
+    const token = localStorage.getItem("authToken");
+  
+    if (!token) {
+      alert("Authentication token not found. Please log in.");
+      return;
+    }
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/feed/createavailability", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // Add the Bearer token to the headers
+        },
+        body: JSON.stringify({
+          startDate: new Date(fromDate).toISOString(),
+          endDate: new Date(toDate).toISOString(),
+        }),
+      });
+  
+      const data = await response.json();
+      console.log("API Response:", data);
+    } catch (error) {
+      console.error("Error while calling API:", error);
+    }
+  };
+  
+
   return (
     <div>
       <MainNavbar />
@@ -22,8 +65,7 @@ function Feed() {
         <div className="w-1/4">
           <aside className=" h-fit rounded-xl bg-white p-4 shadow-lg ms-10 mt-7">
             {/* Profile Card */}
-            <Profile/>
-            
+            <Profile />
           </aside>
           {!aiClicked && (
             <aside className=" h-fit bg-white rounded-xl shadow-lg ms-10 mt-5">
@@ -43,11 +85,52 @@ function Feed() {
               <ChatBot onClose={closehandelAiChatHandler}></ChatBot>
             </aside>
           )}
-          <aside className=" h-fit bg-white rounded-xl shadow-lg ms-10 mt-5 hover:bg-green-200">
-            <div className="flex rounded-xl items-center bg-teal-500">
-              <button className="w-full text-left  py-2 px-4 rounded-lg ">
-                Create a Job
+          <aside className=" h-fit bg-blue-500 rounded-xl shadow-lg ms-10 mt-5">
+            <div className="flex rounded-xl items-center">
+              <button
+                className="w-full text-left py-2 px-4 rounded-lg bg-blue-500 text-white"
+                onClick={() => setShowDropdown(!showDropdown)}
+              >
+                Availability
               </button>
+              {/* Dropdown Content */}
+              {showDropdown && (
+                <div className="mt-2 p-4 border rounded-lg bg-gray-100">
+                  <div className="dates ">
+                    <div className="mb-4">
+                      <label className="block font-bold mb-2">From:</label>
+                      <DatePicker
+                        selected={fromDate}
+                        onChange={(date) => setFromDate(date)}
+                        placeholderText="Select from date"
+                        dateFormat="yyyy/MM/dd"
+                        className="w-full p-2 border rounded-lg"
+                      />
+                    </div>
+
+                    {/* To Date */}
+                    <div className="mb-4">
+                      <label className="block font-bold mb-2">To:</label>
+                      <DatePicker
+                        selected={toDate}
+                        onChange={(date) => setToDate(date)}
+                        placeholderText="Select to date"
+                        dateFormat="yyyy/MM/dd"
+                        className="w-full p-2 border rounded-lg"
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      onClick={handleSubmit}
+                      className="w-full bg-teal-600 text-white py-2 px-4 rounded-lg"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                  {/* From Date */}
+                </div>
+              )}
               <MdKeyboardArrowRight className="text-2xl" />
             </div>
           </aside>
@@ -55,16 +138,14 @@ function Feed() {
 
         {/* Feed Section */}
         <main className="w-1/2 p-6">
-          {/* Post */}
-          {[1, 2].map(( index) => (
-            <Post key={index}/>
+          {[1, 2].map((index) => (
+            <Post key={index} />
           ))}
         </main>
 
         {/* Messaging Section */}
         <aside className="w-1/4 h-fit mt-6 rounded-xl bg-white p-6 shadow-lg">
           <h3 className="font-bold text-gray-800 mb-4">Messaging</h3>
-          {/* Search */}
           <div className="flex items-center bg-gray-100 rounded-lg px-4 py-2 mb-4">
             <CiSearch className="text-2xl me-2" />
             <input
@@ -73,7 +154,6 @@ function Feed() {
               className="bg-transparent w-full focus:outline-none text-sm"
             />
           </div>
-          {/* Messages */}
           <ul className="space-y-4">
             {[1, 2, 3, 4, 5].map((msg, index) => (
               <li
