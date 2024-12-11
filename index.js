@@ -9,10 +9,15 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { google } from 'googleapis';
 
+
 import USER_ROUTER from './routers/userRouters.js';
 import FORUM_ROUTER from './routers/forumRouters.js';
 import POST_ROUTER from './routers/postRouter.js';
 import CHAT_ROUTER from './routers/chatRouters.js';
+import FEED_ROUTER from './routers/feedRouter.js';
+import CHAT_BOT from './routers/ChatBot.js';
+
+
 // import CALENDAR_ROUTER from './routers/calendarRouter.js';
 
 import alumniModel from './model/alumniModel.js';
@@ -23,6 +28,7 @@ import threadModel from './model/threadModel.js';
 import chatModel from './model/chatModel.js';
 import userModel from './model/userModel.js';
 import messagesModel from './model/messagesModel.js'
+
 
 
 dotenv.config();
@@ -46,7 +52,7 @@ const uri = process.env.MONGODBURI;
 
 const connect = async () => {
   try {
-    await mongoose.connect(`${uri}/aludent`);
+    await mongoose.connect(`${uri}`);
     console.log('Connected to database');
   } catch (error) {
     console.error('Error connecting to database:', error);
@@ -78,6 +84,8 @@ app.use('/api/user', USER_ROUTER);
 app.use('/api/discussionforum', FORUM_ROUTER);
 app.use('/api/post', POST_ROUTER);
 app.use('/api/chat', CHAT_ROUTER);
+app.use('api/feed',FEED_ROUTER);
+app.use('/api/chatBot',CHAT_BOT);
 // app.use('/api/event', CALENDAR_ROUTER);
 
 // Web Sockets

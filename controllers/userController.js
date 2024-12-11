@@ -4,8 +4,9 @@ import userQuery from "../querries/userQuery.js";
 import User from "../model/userModel.js";
 import Alumni from "../model/alumniModel.js";
 import Student from "../model/studentModel.js";
-
-const JWT_SECRET = process.env.SECRET;
+import dotenv from 'dotenv';
+dotenv.config();
+const SECRET = process.env.SECRET;
 
 const signin = async (req, res) => {
   const { password, FullName, universityID, email, userType, passoutYear, experiance, rollNo } = req.body;
@@ -31,6 +32,7 @@ const signin = async (req, res) => {
 
     res.status(200).json({ code: 200, status: "Success" });
   } catch (error) {
+    
     res.status(500).json({ code: 500, status: "failed", message: error.message });
   }
 };
@@ -50,10 +52,12 @@ const login = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid Password" });
     }
-
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "24h" });
+    console.log(SECRET);
+    
+    const token = jwt.sign({ userId: user._id },SECRET , { expiresIn: "24h" });
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
