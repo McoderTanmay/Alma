@@ -1,0 +1,30 @@
+class AssetConstants {
+  static String aiAssist = "assets/ai-assist.jpg";
+  static String chevron = "assets/chevron.png";
+  static String close = "assets/close.png";
+  static String comment = "assets/comment.png";
+  static String complete = "assets/complete.png";
+  static String conference = "assets/conference.png";
+  static String connectPeople = "assets/connect-people.jpg";
+  static String create = "assets/create.png";
+  static String discussion = "assets/discussion.png";
+  static String discussions = "assets/discussions.jpg";
+  static String editing = "assets/editing.png";
+  static String expandArrows = "assets/expand-arrows.png";
+  static String eyeClose = "assets/eye-close.png";
+  static String eyeOpen = "assets/eye-open.png";
+  static String facebook = "assets/facebook.png";
+  static String filter = "assets/filter.png";
+  static String forums = "assets/forums.jpg";
+  static String home = "assets/home.png";
+  static String image = "assets/image.jpg";
+  static String like = "assets/like.png";
+  static String magicWand = "assets/magic-wand.png";
+  static String more = "assets/more.png";
+  static String notification = "assets/notification.png";
+  static String people = "assets/people.png";
+  static String profile = "assets/profile.png";
+  static String send = "assets/send.png";
+  static String setting = "assets/setting.png";
+  static String upload = "assets/upload.png";
+}
