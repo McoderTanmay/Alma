@@ -4,8 +4,10 @@ import userQuery from "../querries/userQuery.js";
 import User from "../model/userModel.js";
 import Alumni from "../model/alumniModel.js";
 import Student from "../model/studentModel.js";
+import dotenv from 'dotenv';
+const SECRET = process.env.SECRET;
 
-const JWT_SECRET = process.env.SECRET;
+dotenv.config();
 
 const signin = async (req, res) => {
   const { password, FullName, universityID, email, userType, passoutYear, experiance, rollNo } = req.body;
@@ -37,7 +39,9 @@ const signin = async (req, res) => {
 
 const login = async (req, res) => {
   const { password, rollNo } = req.body;
-
+  console.log(SECRET);
+  console.log(process.env.SECRET);
+  
   try {
     const user = await userQuery.findUserByRollNo(rollNo);
 
@@ -51,7 +55,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid Password" });
     }
 
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "24h" });
+    const token = jwt.sign({ userId: user._id }, process.env.SECRET, { expiresIn: "24h" });
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -70,7 +74,7 @@ const profilePicUpload = async (req, res) => {
     });
   }
 
-  const profilePicUrl = `D:/Projects/Alma/Backend/utils/profilePictures/${file.filename}`;
+  const profilePicUrl = `C:/Users/shant/OneDrive/Desktop/JS p1/Alma/Backend/utils/profilePictures/${file.filename}`;
 
   try {
     const alumni = await Alumni.findById(userId);
@@ -104,6 +108,57 @@ const profilePicUpload = async (req, res) => {
   }
 };
 
+
+const documentUpload = async (req, res) => {
+  const { userId } = req.user;
+  const { file } = req;
+
+  if (!file) {
+    return res.status(400).json({
+      code: 400,
+      status: "Failed",
+      message: "No file uploaded. Please provide a document.",
+    });
+  }
+
+  const documentUrl = `C:/Users/shant/OneDrive/Desktop/JS p1/Alma/Backend/utils/documents/${file.filename}`;
+
+
+  try {
+    // Check if the user is an alumni
+    const alumni = await Alumni.findById(userId);
+
+    if (!alumni) {
+      return res.status(403).json({
+        code: 403,
+        status: "Failed",
+        message: "Only alumni can upload documents.",
+      });
+    }
+
+    // Update the alumni document field
+    alumni.verificationDocument = {
+      documentURL: documentUrl,
+      uploadedDate: new Date(),
+    };
+    await alumni.save();
+
+    res.status(200).json({
+      code: 200,
+      status: "Success",
+      message: "Document uploaded successfully.",
+      alumni,
+    });
+  } catch (error) {
+    console.error("Error uploading document:", error.message);
+    res.status(500).json({
+      code: 500,
+      status: "Failed",
+      message: "An error occurred while uploading the document.",
+    });
+  }
+};
+
 const getUserDetails = async (req, res) => {
   const { userId, userType } = req.user;
 
@@ -131,4 +186,4 @@ const getUserDetails = async (req, res) => {
   }
 };
 
-export { signin, login, profilePicUpload, getUserDetails };
+export { signin, login, profilePicUpload, getUserDetails,documentUpload };
