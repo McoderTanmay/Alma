@@ -1,11 +1,12 @@
-const express = require("express")
-const router = express.Router()
-const formController = require("../controllers/formController")
-const auth = require('../middleware/Auth')
+import express from "express";
+import {createForumThread, createReplyThread, upvotePost, upvoteReplyThread} from "../controllers/formController.js";
+import auth from "../middleware/Auth.js";
 
-router.post("/create",auth,formController.createForumThread);
-router.get("/upvote/:id",auth,formController.upvotePost);
-router.post("/replythread/:id",auth,formController.createReplyThread);
-router.get("/upvotereplythread/:id",auth,formController.upvoteReplyThread)
+const router = express.Router();
 
-module.exports = router;
+router.post("/create", auth, createForumThread);
+router.get("/upvote/:id", auth, upvotePost);
+router.post("/replythread/:id", auth, createReplyThread);
+router.get("/upvotereplythread/:id", auth, upvoteReplyThread);
+
+export default router;

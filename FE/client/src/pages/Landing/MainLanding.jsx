@@ -10,7 +10,7 @@ function MainLanding() {
       <Nav></Nav>
       <div className="min-h-screen bg-white flex flex-col items-center">
         {/* Main Content */}
-        <main className="flex-1 flex flex-col lg:flex-row items-center justify-between px-6">
+        <main className="z-10 flex-1 flex z flex-col lg:flex-row items-center justify-between px-6">
           {/* Left Content */}
           <div className="flex-1 text-center lg:text-left">
             <h1 className="text-4xl leading-tight font-semibold">
@@ -56,11 +56,11 @@ function MainLanding() {
             <img
               src={girl} // Replace with the actual image URL
               alt="Graduate"
-              className="relative z-10 size-96"
+              className="relative z-20 size-96"
             />
           </div>
-          <div className="absolute inset-x-0 bottom-[118px] z-0 overflow-hidden">
-            <img src={wave} alt="" className="w-full object-cover" />
+          <div className="-z-10 absolute inset-x-0 bottom-[118px] overflow-hidden">
+            <img src={wave} alt="" className="w-full  object-cover" />
           </div>
         </main>
         {/* <div className="m-[-32px] wave z-0 relative bottom-[316px]"><img src={wave} alt="" srcset="" /></div> */}

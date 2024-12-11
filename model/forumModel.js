@@ -1,7 +1,9 @@
-const mongoose = require('mongoose');
 
+import mongoose from 'mongoose';
 
-const forumSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const forumSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -12,7 +14,7 @@ const forumSchema = new mongoose.Schema({
     required: true,
   },
   author: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: true, // Reference to either Alumni or Student
   },
   userType: {
@@ -31,7 +33,7 @@ const forumSchema = new mongoose.Schema({
   },
   upvotes: [
     {
-      userId: { type: mongoose.Schema.Types.ObjectId }, // ID of the user who upvoted
+      userId: { type: Schema.Types.ObjectId }, // ID of the user who upvoted
       userType: {
         type: String,
         enum: ['alumni', 'student'], // Type of the user who upvoted
@@ -41,13 +43,10 @@ const forumSchema = new mongoose.Schema({
   ],
   threads: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Thread',
     },
   ],
 });
 
-const Forum = mongoose.model('Forum', forumSchema);
-
-module.exports = Forum;
-
+export default mongoose.model('Forum', forumSchema);

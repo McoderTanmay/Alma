@@ -1,83 +1,118 @@
-const Chat = require("../model/chatModel");
-const Message = require("../model/messagesModel");
+import Chat from '../model/chatModel.js';
+import Message from '../model/messagesModel.js';
 
-module.exports = {
-  async createOrGet(req, res) {
-    const fromUser = req.user.userId;
-    const toUser = req.body.toUser;
+const createOrGetChat = async (req, res) => {
     try {
-      let chat = await Chat.findOne({
-        participants: { $all: [fromUser, toUser] },
-      });
+        const fromUser = req.user.userId;
+        const toUser = req.body.toUser;
 
-      if (!chat) {
-        chat = await Chat.create({ participants: [fromUser, toUser] });
-      }
-      return res.status(200).json(chat);
+        if (!toUser) {
+            return res.status(400).json({ message: 'Recipient user ID is required.' });
+        }
+
+        let chat = await Chat.findOne({
+            participants: { $all: [fromUser, toUser] },
+        });
+
+        if (!chat) {
+            chat = new Chat({ participants: [fromUser, toUser] });
+            await chat.save();
+        }
+
+        res.status(200).json(chat);
     } catch (error) {
-      return res.status(500).json({ error: error.message });
+        console.error('Error creating or retrieving chat:', error);
+        res.status(500).json({ message: 'An error occurred while creating or retrieving the chat.', error: error.message });
     }
-  },
-  async getAllChats(req, res) {
-    const userId = req.user.userId;
-    try {
-      const chats = await Chat.find({ participants: userId })
-        .populate("participants", "FullName")
-        .sort({ updatedAt: -1 });
+};
 
-      return res.status(200).json(chats);
+const getAllChats = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const chats = await Chat.find({ participants: userId })
+            .populate('participants', 'FullName')
+            .sort({ updatedAt: -1 });
+
+        res.status(200).json(chats);
     } catch (error) {
-      return res.status(500).json({ error: error.message });
+        console.error('Error fetching chats:', error);
+        res.status(500).json({ message: 'An error occurred while fetching chats.', error: error.message });
     }
-  },
-  async sendMessage(req, res) {
-    const { chatId } = req.params;
-    const { message } = req.body;
-    const sender = req.user.userId;
+};
 
+const sendMessage = async (req, res) => {
     try {
-      const newMessage = await Message.create({
-        chat: chatId,
-        sender,
-        message,
-      });
+        const { chatId } = req.params;
+        const { message } = req.body;
+        const sender = req.user.userId;
 
-      await Chat.findByIdAndUpdate(chatId, {
-        lastMessage: message,
-        lastMessageAt: new Date(),
-      });
+        if (!message) {
+            return res.status(400).json({ message: 'Message content is required.' });
+        }
 
-      return res.status(201).json(newMessage);
+        const newMessage = new Message({
+            chat: chatId,
+            sender,
+            message,
+        });
+        await newMessage.save();
+
+        await Chat.findByIdAndUpdate(chatId, {
+            lastMessage: message,
+            lastMessageAt: new Date(),
+        });
+
+        res.status(201).json({
+            message: 'Message sent successfully!',
+            newMessage,
+        });
     } catch (error) {
-      return res.status(500).json({ error: error.message });
+        console.error('Error sending message:', error);
+        res.status(500).json({ message: 'An error occurred while sending the message.', error: error.message });
     }
-  },
-  async getChatMessages(req, res) {
-    const { chatId } = req.params;
+};
 
+const getChatMessages = async (req, res) => {
     try {
-      const messages = await Message.find({ chat: chatId })
-        .populate("sender", "FullName")
-        .sort({ createdAt: 1 });
+        const { chatId } = req.params;
+        const messages = await Message.find({ chat: chatId })
+            .populate('sender', 'FullName')
+            .sort({ createdAt: 1 });
 
-      return res.status(200).json(messages);
+        res.status(200).json(messages);
     } catch (error) {
-      return res.status(500).json({ error: error.message });
+        console.error('Error fetching chat messages:', error);
+        res.status(500).json({ message: 'An error occurred while fetching chat messages.', error: error.message });
     }
-  },
-  async markAsRead(req, res){
-    const { messageId } = req.params;
+};
 
+const markMessageAsRead = async (req, res) => {
     try {
+        const { messageId } = req.params;
         const updatedMessage = await Message.findByIdAndUpdate(
             messageId,
             { isRead: true },
             { new: true }
         );
 
-        return res.status(200).json(updatedMessage);
+        if (!updatedMessage) {
+            return res.status(404).json({ message: 'Message not found.' });
+        }
+
+        res.status(200).json({
+            message: 'Message marked as read successfully!',
+            updatedMessage,
+        });
     } catch (error) {
-        return res.status(500).json({ error: error.message });
+        console.error('Error marking message as read:', error);
+        res.status(500).json({ message: 'An error occurred while marking the message as read.', error: error.message });
     }
-  }
+};
+
+export {
+    createOrGetChat,
+    getAllChats,
+    sendMessage,
+    getChatMessages,
+    markMessageAsRead
 };
