@@ -12,16 +12,16 @@ function createUploadDir(dir) {
 // Dynamic storage configuration
 const storage = (uploadDir) => multer.diskStorage({
     destination: (req, file, cb) => {
-        createUploadDir(uploadDir); // Ensure directory exists
-        cb(null, uploadDir); // Save files to the provided directory
+        const absoluteDir = path.resolve(uploadDir); // Ensure correct absolute path
+        createUploadDir(absoluteDir);
+        cb(null, absoluteDir);
     },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + path.extname(file.originalname)); // Generate a unique filename
+        cb(null, uniqueSuffix + path.extname(file.originalname));
     },
 });
 
-// Common multer configuration function
 const createMulterUpload = (uploadDir) => multer({
     storage: storage(uploadDir),
     limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5 MB
@@ -36,6 +36,6 @@ const createMulterUpload = (uploadDir) => multer({
 });
 
 module.exports = {
-    postUpload: createMulterUpload(path.resolve('../utils/postImages')),
-    profileUpload: createMulterUpload(path.resolve('../utils/profilePictures')),
+    postUpload: createMulterUpload('./utils/postImages'), // Relative paths here
+    profileUpload: createMulterUpload('./utils/profilePictures'),
 };

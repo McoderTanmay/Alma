@@ -1,6 +1,7 @@
 const express = require("express");
 const Route = express.Router();
 const userController = require("../controllers/userController");
+
 const { profileUpload } = require('../config/multerConfig');
 const auth = require("../middleware/Auth");
 Route.post('/signin', userController.signin);

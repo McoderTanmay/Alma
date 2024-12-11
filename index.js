@@ -12,7 +12,7 @@ const USER_ROUTER = require('./routers/userRouters');
 const FORUM_ROUTER = require('./routers/forumRouters');
 const POST_ROUTER = require('./routers/postRouter');
 
-const CALENDAR_ROUTER = require('./routers/calendarRouter')
+// const CALENDAR_ROUTER = require('./routers/calendarRouter')
 
 const CHAT_ROUTER = require('./routers/chatRouters');
 
@@ -38,7 +38,7 @@ app.use("/api/discussionforum",FORUM_ROUTER);
 app.use("/api/post", POST_ROUTER);
 app.use("/api/chat", CHAT_ROUTER);
 
-app.use("/api/event",CALENDAR_ROUTER);
+// app.use("/api/event",CALENDAR_ROUTER);
 
 async function connect(){
     try {

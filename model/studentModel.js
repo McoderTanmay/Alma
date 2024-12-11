@@ -45,6 +45,13 @@ const studentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',
     },
+    isVerified:{
+        type: String,
+        enum: [yes, no]
+    },
+    docs:{
+        type: String,
+    }
 });
 
 const Student = mongoose.model('Student', studentSchema);

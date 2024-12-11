@@ -77,7 +77,7 @@ function Nav() {
           </h1>
         </div>
         <div className="flex">
-          <div className="icons flex mr-[150px] mt-2">
+          <div className="icons flex mt-2">
             <img
               src={eventLogo}
               alt="Events"
@@ -90,7 +90,7 @@ function Nav() {
           <div className="loginAndSingup flex items-center">
             <button
               onClick={handleLoginClick}
-              class="border-2 border-teal-600 text-teal-600 px-4 py-2 rounded-full hover:bg-teal-600 hover:text-white transition"
+              class="border-2 border-teal-600 me-2 text-teal-600 px-4 py-2 rounded-full hover:bg-teal-600 hover:text-white transition"
             >
               Log In
             </button>

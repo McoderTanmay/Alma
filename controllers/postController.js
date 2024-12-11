@@ -5,16 +5,7 @@ module.exports = {
   async createPost(req, res) {
     const user = req.user.userId; // Extract user ID from authenticated request
     const { content, tags } = req.body; // Destructure content and tags from the request body
-
-    if (!req.file) {
-      return res.status(400).json({
-          code: 400,
-          status: 'Failed',
-          message: 'No file uploaded. Please provide an image.',
-      });
-  }
-  
-   
+    
     try {
       // Create a new post with the extracted data
       const newPost = await Post.create({
