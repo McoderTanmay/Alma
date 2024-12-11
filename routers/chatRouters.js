@@ -1,12 +1,13 @@
-const express = require("express");
+import express from "express";
+import auth from "../middleware/Auth.js";
+import {createOrGetChat, getAllChats, sendMessage, getChatMessages, markMessageAsRead} from "../controllers/chatController.js";
+
 const Route = express.Router();
-const auth = require("../middleware/Auth");
-const chatController = require("../controllers/chatController");
 
-Route.post("/", auth, chatController.createOrGet);
-Route.get("/", auth, chatController.getAllChats);
-Route.post("/:chatId", auth, chatController.sendMessage);
-Route.get("/:chatId", auth, chatController.getChatMessages);
-Route.get("/read/:messageId", auth, chatController.markAsRead);
+Route.post("/", auth, createOrGetChat);
+Route.get("/", auth, getAllChats);
+Route.post("/:chatId", auth, sendMessage);
+Route.get("/:chatId", auth, getChatMessages);
+Route.get("/read/:messageId", auth, markMessageAsRead);
 
-module.exports = Route;
+export default Route;

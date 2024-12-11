@@ -1,14 +1,17 @@
-const mongoose = require('mongoose');
 
-const chatSchema = new mongoose.Schema(
+import mongoose from 'mongoose';
+
+const { Schema } = mongoose;
+
+const chatSchema = new Schema(
     {
         participants: [
-            { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+            { type: Schema.Types.ObjectId, ref: 'User', required: true },
         ],
-        lastMessage: { type: String }, 
+        lastMessage: { type: String },
         lastMessageAt: { type: Date, default: Date.now },
     },
-    { timestamps: true } 
+    { timestamps: true } // Adds createdAt and updatedAt fields
 );
 
-module.exports = mongoose.model('Chat', chatSchema);
+export default mongoose.model('Chat', chatSchema);

@@ -1,46 +1,49 @@
-const mongoose = require('mongoose');
+
+import mongoose from 'mongoose';
+
+const { Schema } = mongoose;
 
 const experience = {
-    companyName:{
+    companyName: {
         type: String,
     },
-    position:{
+    position: {
         type: String,
     },
-    duration:{
+    duration: {
         type: String,
     },
-    about:{
+    about: {
         type: String,
-    }
-}
+    },
+};
 
-const userSchema = mongoose.Schema(
+const userSchema = new Schema(
     {
         FullName: {
             type: String,
-            required: true
+            required: true,
         },
         universityID: {
             type: String,
-            required: true
+            required: true,
         },
         password: {
             type: String,
-            required: true
+            required: true,
         },
         rollNo: {
             type: String,
-            required: true
+            required: true,
         },
         email: {
             type: String,
-            required: true
+            required: true,
         },
         userType: {
             type: String,
             enum: ['alumni', 'student'],
-            required: true
+            required: true,
         },
         passoutYear: {
             type: Number,
@@ -51,23 +54,24 @@ const userSchema = mongoose.Schema(
         profile: {
             type: String,
         },
-        profilePic: { // Field for profile picture
+        profilePic: {
             type: String, // This could be a URL or file path
             default: '', // Optional: Provide a default image path if necessary
         },
         forum: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Forum",
+            type: Schema.Types.ObjectId,
+            ref: 'Forum',
         },
-
-        post:[{
-
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Post",
-        }]
+        post: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Post',
+            },
+        ],
+    },
+    {
+        timestamps: true, // Adds createdAt and updatedAt fields
     }
 );
 
-
-const User = mongoose.model("User", userSchema);
-module.exports = User; 
+export default mongoose.model('User', userSchema);

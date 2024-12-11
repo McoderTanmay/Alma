@@ -1,59 +1,55 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
+const { Schema } = mongoose;
 
 // Student schema
-const studentSchema = new mongoose.Schema({
+const studentSchema = new Schema(
+  {
     FullName: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     universityID: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     password: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     rollNo: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     userType: {
-        type: String,
-        default: 'student',
+      type: String,
+      default: 'student',
     },
     passoutYear: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
     profile: {
-        type: String,
+      type: String,
     },
     profilePic: {
-        type: String,
-        default: '',
+      type: String,
+      default: '',
     },
     forum: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Forum',
+      type: Schema.Types.ObjectId,
+      ref: 'Forum',
     },
     post: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post',
+      type: Schema.Types.ObjectId,
+      ref: 'Post',
     },
-    isVerified:{
-        type: String,
-        enum: [yes, no]
-    },
-    docs:{
-        type: String,
-    }
-});
+  },
+  { timestamps: true } // Adds createdAt and updatedAt fields automatically
+);
 
-const Student = mongoose.model('Student', studentSchema);
-
-module.exports = Student;
+export default mongoose.model('Student', studentSchema);

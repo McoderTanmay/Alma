@@ -1,49 +1,58 @@
-const post = require('../model/postModel');
-module.exports = {
-    async create(body){
-        return await post.create(body);
-    },
-    async getPosts(){
-        return await post.find({}).sort({ createdAt: -1 });
-    },
-    async deletePost(id){
-        return await post.deleteOne({_id:id});
-    },
-    async likePost(postId, userId) {
-        try{
-            const currentpost = await post.findById({_id:postId});
-            if(!currentpost){
-                throw new Error('Something went wrong');
-            }
-            if(!currentpost.likes.include(userId)){
-                currentpost.likes.push(userId);
-            }else{
-                currentpost.likes.splice(userId);
-            }
-        }catch(error){
-            console.error('Error performing task', error.message);
-            throw error;
-        }
-    },
-    async getUserPosts(userId, userType) {
-        try {
-            let user;
-            if (userType === 'alumni') {
-                user = await Alumni.findById(userId).populate('post');
-            } else if (userType === 'student') {
-                user = await Student.findById(userId).populate('post');
-            } else {
-                throw new Error('Invalid user type. Must be "alumni" or "student".');
-            }
-            if (!user) {
-                throw new Error('User not found');
-            }
+import Post from '../model/postModel.js';
 
-            return user.post;
-        } catch (error) {
-            console.error('Error fetching user posts:', error.message);
-            throw error;
-        }
-    },
-    
-}
+const create = async (body) => {
+  return await Post.create(body);
+};
+
+const getPosts = async () => {
+  return await Post.find({}).sort({ createdAt: -1 });
+};
+
+const deletePost = async (id) => {
+  return await Post.deleteOne({ _id: id });
+};
+
+const likePost = async (postId, userId) => {
+  try {
+    const currentPost = await Post.findById(postId);
+
+    if (!currentPost) {
+      throw new Error('Post not found');
+    }
+
+    if (!currentPost.likes.includes(userId)) {
+      currentPost.likes.push(userId);
+    } else {
+      currentPost.likes = currentPost.likes.filter((id) => id !== userId);
+    }
+
+    await currentPost.save();
+    return currentPost;
+  } catch (error) {
+    console.error('Error updating likes:', error.message);
+    throw error;
+  }
+};
+
+const getUserPosts = async (userId, userType) => {
+  try {
+    const Model = userType === 'alumni' ? Alumni : userType === 'student' ? Student : null;
+
+    if (!Model) {
+      throw new Error('Invalid user type. Must be "alumni" or "student".');
+    }
+
+    const user = await Model.findById(userId).populate('post');
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return user.post;
+  } catch (error) {
+    console.error('Error fetching user posts:', error.message);
+    throw error;
+  }
+};
+
+export default { create, getPosts, deletePost, likePost, getUserPosts };
