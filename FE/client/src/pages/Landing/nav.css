@@ -1,4 +1,14 @@
 /* Navbar styles */
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .popup-cards-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Three columns for the cards */
@@ -73,6 +83,13 @@
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     
+
+    
+  }
+  
+  .popup-card:hover{
+    background-color: rgb(215, 235, 249);
+
   }
   
   .popup-card-image {
@@ -155,6 +172,9 @@
   
     .popup-card img {
       width: 100%;
-      height: auto;
+
+      height: auto;
     }
-}
+  }
+  
+

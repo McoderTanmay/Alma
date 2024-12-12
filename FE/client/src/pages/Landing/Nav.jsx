@@ -31,6 +31,7 @@ function Nav() {
   const [cnfpassword, setCnfpassword] = useState("");
   const [passDNM, setPassDNM] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+
   const [skillInput, setSkillInput] = useState("");
   const [skills, setSkills] = useState([]);
 
@@ -45,6 +46,7 @@ function Nav() {
     const updatedSkills = skills.filter((_, i) => i !== index);
     setSkills(updatedSkills);
   };
+
 
   const nevigate = useNavigate();
 
@@ -133,10 +135,12 @@ function Nav() {
                 >
                   <div className="popup-body">
                     <div className="popup-header">Success Stories</div>
+
                     {/* <p>Read how schools leverage Aludent in their communities.</p> */}
                     {/* <a href="#" className="see-all-link">
                       See All Stories →
                     </a> */}
+
                     <div className="popup-cards-container">
                       <div className="popup-card">
                         <img
@@ -176,10 +180,12 @@ function Nav() {
                             alumni-led mentorship programs, which guided her
                             toward a career in public policy. Today, she works
                             as a policy analyst for a well-known NGO and is an
+
                             active speaker at forums, focusing on sustainable
                             development policies. She often returns to the
                             University to guide students about career options in
                             the public sector.
+
                           </p>
                         </div>
                       </div>
@@ -198,9 +204,71 @@ function Nav() {
                             Aludent for networking and job placement support.
                             Through the alumni network, he found a mentor who
                             helped him land a position at a leading financial
-                            firm. Vikram is now a financial analyst and
-                            frequently advises students at Maharaja College
-                            about pursuing careers in finance and investment.
+
+                            firm.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="popup-card">
+                        <img
+                          src="Ankit.jpg"
+                          alt="University of Miami"
+                          className="popup-card-image"
+                        />
+                        <div>
+                          <h3>Ankit Rathore</h3>
+                          <p>
+                            Ankit Rathore Sir, an engineering graduate, launched
+                            his own tech startup, "RuralConnect," which focuses
+                            on improving internet accessibility in remote areas.
+                            After working for a few years in a multinational
+                            company, he returned to Rajasthan to solve
+                            connectivity issues in rural regions. His efforts
+                            have brought affordable broadband to over 1,000
+                            villages, transforming the way people access
+                            education and healthcare.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="popup-card">
+                        <img
+                          src="Ramesh.jpg"
+                          alt="University of Miami"
+                          className="popup-card-image"
+                        />
+                        <div>
+                          <h3>Ramesh Chaudhary</h3>
+                          <p>
+                            Ramesh Chaudhary sir, an alumnus of the University
+                            of Rajasthan, followed his passion for storytelling
+                            and filmmaking. His debut film, which highlighted
+                            the struggles of rural artisans, won a National Film
+                            Award. Ramesh now runs workshops to train aspiring
+                            filmmakers in small towns across Rajasthan,
+                            encouraging local talent to explore cinema as a
+                            career.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="popup-card">
+                        <img
+                          src="Kavita.jpg"
+                          alt="University of Miami"
+                          className="popup-card-image"
+                        />
+                        <div>
+                          <h3>Kavita Joshi </h3>
+                          <p>
+                            Kavita Joshi mam completed her graduation from
+                            Maharani’s College with a degree B.tech (IT). With a
+                            dream to serve the nation, she cleared the UPSC
+                            Civil Services Examination in her second attempt,
+                            securing a top rank. Currently, she is an IAS
+                            officer posted in Rajasthan, focusing on women
+                            empowerment and rural development programs.
+
                           </p>
                         </div>
                       </div>
@@ -225,6 +293,16 @@ function Nav() {
           </div>
         </div>
       </div>
+      <div className="w-full bg-teal-500 py-2">
+        <div className="overflow-hidden">
+          <div className="overflow-hidden bg-gray-800">
+            <div className="whitespace-nowrap animate-marquee text-white text-lg font-bold">
+              Upcoming Alumini Offline Meetups: Miss Aanya Singh will visit
+              campus on 2nd Jan 2025! &nbsp; | &nbsp; Ankit Sir was listed in Forbes India's "30 Under 30" for his contributions to technology and rural development. &nbsp; | &nbsp; Check out the latest feature on our matching
+            </div>
+          </div>
+        </div>
+      </div>
       {loginPopUp && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 pt-0 w-96 shadow-lg relative">
@@ -343,7 +421,9 @@ function Nav() {
                   />
                 </div>
               </div>
+
               <div className="mb-3">
+
                 <label
                   htmlFor="document"
                   className="block font-medium text-gray-700"
@@ -358,7 +438,9 @@ function Nav() {
                 />
               </div>
 
+
               
+
 
               <button
                 onClick={handelSigninBtn}

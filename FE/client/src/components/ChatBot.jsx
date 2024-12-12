@@ -28,7 +28,7 @@ const ChatBot =({ onClose }) => {
       >
         {/* Header */}
         <div className="bg-teal-700 px-4 py-2 rounded-t-lg flex justify-between items-center">
-          <h1 className="font-bold text-lg">AlumnAI</h1>
+          <h1 className="font-bold text-lg">AI Assist</h1>
           <button
             className="text-white text-lg"
             onClick={onClose} // Trigger close animation

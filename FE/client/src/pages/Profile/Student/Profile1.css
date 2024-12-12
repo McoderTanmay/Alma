@@ -1,0 +1,47 @@
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures space is distributed between elements */
+  padding: 20px;
+  background:#fffcfc;;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture {
+  border-radius: 50%;
+  width: 120px;
+  margin-right: 20px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  background-image: url("C:/Users/91999/OneDrive/Desktop/react/demoshopapp/public/profile.png");
+}
+
+.profile-info h1 {
+  margin: 0;
+}
+
+.profile-actions {
+  margin-left: auto; /* Pushes the actions to the right */
+  display: flex; /* Aligns buttons horizontally */
+  gap: 10px; /* Adds space between buttons */
+}
+
+.profile-actions .edit-btn,
+.profile-actions .contact-btn,
+.profile-actions .connect-btn { /* Ensure connect-btn styles are applied */
+  padding: 8px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #081421;
+  color: white;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.profile-actions .edit-btn:hover,
+.profile-actions .contact-btn:hover,
+.profile-actions .connect-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
