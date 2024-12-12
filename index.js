@@ -9,6 +9,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { google } from 'googleapis';
 
+import CHATBOT_ROUTER from './routers/ChatBot.js'
 import USER_ROUTER from './routers/userRouters.js';
 import FORUM_ROUTER from './routers/forumRouters.js';
 import POST_ROUTER from './routers/postRouter.js';
@@ -80,6 +81,7 @@ app.use('/api/discussionforum', FORUM_ROUTER);
 app.use('/api/post', POST_ROUTER);
 app.use('/api/chat', CHAT_ROUTER);
 app.use('/api/feed', FEED_ROUTER);
+app.use('/api/chat_bot', CHATBOT_ROUTER);
 // app.use('/api/event', CALENDAR_ROUTER);
 
 // Web Sockets
