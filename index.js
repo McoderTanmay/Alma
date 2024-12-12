@@ -48,7 +48,7 @@ const uri = process.env.MONGODBURI;
 
 const connect = async () => {
   try {
-    await mongoose.connect(`${uri}/aludent`);
+    await mongoose.connect(`${uri}`);
     console.log('Connected to database');
   } catch (error) {
     console.error('Error connecting to database:', error);

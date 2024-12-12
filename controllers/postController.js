@@ -4,14 +4,14 @@ import path from "path";
 
 export const createPost = async (req, res) => {
     const user = req.user.userId; // Extract user ID from authenticated request
-    const { content, tags } = req.body; // Destructure content and tags from the request body
+    const { content, tags, images } = req.body; // Destructure content and tags from the request body
 
     try {
         // Create a new post with the extracted data
         const newPost = await Post.create({
             userId: user,
             content,
-            images: imageUrl,
+            images,
             tags,
         });
 

@@ -160,21 +160,24 @@ const documentUpload = async (req, res) => {
 };
 
 const getUserDetails = async (req, res) => {
-  const { userId, userType } = req.user;
+  const { userId } = req.user;
 
   try {
-    const Model = userType === "student" ? Student : userType === "alumni" ? Alumni : null;
+    let user;
 
-    if (!Model) {
-      return res.status(400).json({ code: 400, status: "Failed", message: "Invalid user type." });
+    // First, attempt to find the user in the Alumni collection
+    user = await Alumni.findById(userId);
+    if (!user) {
+      // If not found in Alumni, try finding in the Student collection
+      user = await Student.findById(userId);
     }
 
-    const user = await Model.findById(userId).populate("forum").populate("post");
-
+    // If no user is found in either collection, return a 404 error
     if (!user) {
       return res.status(404).json({ code: 404, status: "Failed", message: "User not found." });
     }
 
+    // If the user is found, return the user details
     res.status(200).json({ code: 200, status: "Success", user });
   } catch (error) {
     console.error("Error fetching user details:", error.message);

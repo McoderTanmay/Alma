@@ -59,7 +59,7 @@ function MainLanding() {
               className="relative z-20 size-96"
             />
           </div>
-          <div className="-z-10 absolute inset-x-0 bottom-[118px] overflow-hidden">
+          <div className="-z-10 absolute inset-x-0 bottom-[70px] overflow-hidden">
             <img src={wave} alt="" className="w-full  object-cover" />
           </div>
         </main>

@@ -1,0 +1,44 @@
+.about {
+    padding: 15px 20px;
+    margin: 20px 0;
+    background: #fffcfc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .about-header h3 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  
+  .edit-icon {
+    background:  #120f54;;
+    border: none;
+    font-size: 1rem;
+    color:  #dedee9;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s, transform 0.2s;
+  }
+  
+  .edit-icon:hover {
+    color: #218838;
+    transform: scale(1.1);
+    color: white;
+  }
+  
+  .about p {
+    margin: 15px 0;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #333;
+  }
+  
