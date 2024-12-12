@@ -6,6 +6,8 @@ import Profile from "./Profile";
 import Post from "./Post";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./Feed.css";
+
 
 import MainNavbar from "../../components/MainNav";
 
@@ -14,6 +16,14 @@ function Feed() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  const [showNotification, setShowNotification] = useState(false);
+  const handlemySubmit = () => {
+    // Handle form submission logic here
+    setShowNotification(true); // Show notification
+    setTimeout(() => {
+      setShowNotification(false); // Hide notification after 3 seconds
+   }, 3000);
+  };
 
   const handelAiChatHandler = () => {
     setAiClicked(true);
@@ -60,6 +70,18 @@ function Feed() {
   return (
     <div>
       <MainNavbar />
+      <div className="w-full bg-teal-500 py-2">
+        <div className="overflow-hidden">
+          <div className="overflow-hidden bg-gray-800">
+            <div className="whitespace-nowrap animate-marquee text-white text-lg font-bold">
+              Upcoming Alumini Offline Meetups: Miss Aditi Ranjan will visit
+              campus on 2nd Jan 2025! &nbsp; | &nbsp; Check out the latest
+              features on our platform! &nbsp; | &nbsp; Don't miss our special
+              offers this week!
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="flex bg-gray-200">
         {/* Sidebar */}
         <div className="w-1/4">
@@ -122,7 +144,7 @@ function Feed() {
 
                     {/* Submit Button */}
                     <button
-                      onClick={handleSubmit}
+                      onClick={handlemySubmit}
                       className="w-full bg-teal-600 text-white py-2 px-4 rounded-lg"
                     >
                       Submit
@@ -133,6 +155,11 @@ function Feed() {
               )}
               <MdKeyboardArrowRight className="text-2xl" />
             </div>
+            {showNotification && (
+        <div className="mt-4 p-4 text-center bg-green-500 text-white rounded-lg shadow-lg">
+          Your availability has been submitted successfully!
+        </div>
+        )}
           </aside>
         </div>
 

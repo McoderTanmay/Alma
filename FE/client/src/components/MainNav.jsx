@@ -31,12 +31,12 @@ function MainNavbar() {
         <div>
             <img className="size-6" src={home} alt="Home" srcset="" />
         </div>
-        <div>
+        {/* <div>
             <img className="size-6" src={bell} alt="Notification" srcset="" />
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
             <img className="size-6" src={event} alt="event" srcset="" />
-        </div>
+        </div> */}
         <div>
             <img className="size-6" src={chat} alt="chat" srcset="" />
         </div>
