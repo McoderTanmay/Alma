@@ -32,6 +32,22 @@ function Nav() {
   const [passDNM, setPassDNM] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
+  const [skillInput, setSkillInput] = useState("");
+  const [skills, setSkills] = useState([]);
+
+  const addSkill = () => {
+    if (skillInput.trim()) {
+      setSkills([...skills, skillInput.trim()]);
+      setSkillInput("");
+    }
+  };
+
+  const removeSkill = (index) => {
+    const updatedSkills = skills.filter((_, i) => i !== index);
+    setSkills(updatedSkills);
+  };
+
+
   const nevigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -120,6 +136,11 @@ function Nav() {
                   <div className="popup-body">
                     <div className="popup-header">Success Stories</div>
 
+                    {/* <p>Read how schools leverage Aludent in their communities.</p> */}
+                    {/* <a href="#" className="see-all-link">
+                      See All Stories →
+                    </a> */}
+
                     <div className="popup-cards-container">
                       <div className="popup-card">
                         <img
@@ -159,7 +180,12 @@ function Nav() {
                             alumni-led mentorship programs, which guided her
                             toward a career in public policy. Today, she works
                             as a policy analyst for a well-known NGO and is an
-                            active speaker at forums.
+
+                            active speaker at forums, focusing on sustainable
+                            development policies. She often returns to the
+                            University to guide students about career options in
+                            the public sector.
+
                           </p>
                         </div>
                       </div>
@@ -178,6 +204,7 @@ function Nav() {
                             Aludent for networking and job placement support.
                             Through the alumni network, he found a mentor who
                             helped him land a position at a leading financial
+
                             firm.
                           </p>
                         </div>
@@ -241,6 +268,7 @@ function Nav() {
                             securing a top rank. Currently, she is an IAS
                             officer posted in Rajasthan, focusing on women
                             empowerment and rural development programs.
+
                           </p>
                         </div>
                       </div>
@@ -334,74 +362,68 @@ function Nav() {
               </h2>
             </div>
 
-            <form>
-              <div className="mb-4">
+            <form className="pt-4"> 
+              <div className="mb-3 ">
                 <input
                   onChange={(e) => setRollNo(e.target.value)}
                   type="text"
                   id="enrollment"
-                  className="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
                   placeholder="Enter your enrollment no."
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-3 ">
                 <input
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   id="Full Name"
-                  className="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
                   placeholder="Enter your Full Name"
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-3">
                 <input
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   id="Email"
-                  className="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
                   placeholder="Enter your Email."
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-3">
                 <input
-                  onChange={(e) => {
-                    setUserType(e.target.value);
-                  }}
-                  type="user"
+                  onChange={(e) => setUserType(e.target.value)}
+                  type="text"
                   id="user"
-                  className="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
                   placeholder="Student or Alumni"
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-3">
                 <input
-                  onChange={(e) => {
-                    setRpassword(e.target.value);
-                  }}
+                  onChange={(e) => setRpassword(e.target.value)}
                   type="password"
                   id="Password"
                   className={`${
                     passDNM ? "bg-red-400 border-red-600" : ""
-                  } w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500`}
+                  } w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500`}
                   placeholder="Enter your Password"
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-3">
                 <div className="relative">
                   <input
-                    onChange={(e) => {
-                      setCnfpassword(e.target.value);
-                    }}
+                    onChange={(e) => setCnfpassword(e.target.value)}
                     type="password"
                     id="cnfpassword"
-                    className="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
                     placeholder="Confirm your password"
                   />
                 </div>
               </div>
-              <div className="mb-4">
+
+              <div className="mb-3">
+
                 <label
                   htmlFor="document"
                   className="block font-medium text-gray-700"
@@ -415,6 +437,11 @@ function Nav() {
                   className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500"
                 />
               </div>
+
+
+              
+
+
               <button
                 onClick={handelSigninBtn}
                 type="submit"
@@ -423,6 +450,7 @@ function Nav() {
                 SignIn
               </button>
             </form>
+
             <button
               onClick={handleCloseSigninPopup}
               className="absolute top-2 right-2 text-white hover:text-gray-800"

@@ -48,6 +48,20 @@ const studentSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Post',
     },
+    verificationStatus: {
+      isVerified: { type: Boolean, default: true },
+      verifiedBy: { type: String, default: null },
+      verifiedDate: { type: Date },
+      remarks: { type: String },
+  },
+  verificationDocument: {
+    documentURL: { type: String, default: null },
+    uploadedDate: { type: Date },
+},
+    skills: {
+      type: [String], // Array of strings to hold skills
+      default: [],    // Default is an empty array
+    },
   },
   { timestamps: true } // Adds createdAt and updatedAt fields automatically
 );
