@@ -10,6 +10,7 @@ import "./Feed.css";
 
 
 import MainNavbar from "../../components/MainNav";
+import { Link } from "react-router-dom";
 
 function Feed() {
   const [aiClicked, setAiClicked] = useState(false);
@@ -54,8 +55,8 @@ function Feed() {
       }, 1500);
     } else {
       setError("Error: Please fill out all required fields!");
-    }
-  };
+}
+};
   const handleSubmit = async () => {
     if (!fromDate || !toDate) {
       alert("Please select both From and To dates");
@@ -120,7 +121,7 @@ function Feed() {
                   onClick={handelAiChatHandler}
                   className="w-full text-left bg-white py-2 px-4 rounded-lg"
                 >
-                  Chat with Alumn<span className="text-teal-600">AI</span>
+                  Chat with Assistant <span className="text-teal-600">AI</span>
                 </button>
                 <MdKeyboardArrowRight className="text-2xl" />
               </div>
@@ -135,12 +136,12 @@ function Feed() {
           < aside className=" h-fit bg-blue-500 rounded-xl shadow-lg ms-10 mt-5">
            
       <div className="flex rounded-xl items-center bg-teal-500">
-        <button
-          className="w-full text-left py-2 px-4 rounded-lg text-white"
-          onClick={handleCreateJobClick}
-        >
+        <Link to = "/jobportal" className="w-full text-left py-2 px-4 rounded-lg text-white">
+          
+          
+        
           Create a Job
-        </button>
+          </Link>
       </div>
         {/* Modal */}
     {isModalOpen && (

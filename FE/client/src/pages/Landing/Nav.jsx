@@ -46,20 +46,20 @@ function Nav() {
     setSkills(updatedSkills);
   };
 
-  const [skillInput, setSkillInput] = useState("");
-  const [skills, setSkills] = useState([]);
+  // const [skillInput, setSkillInput] = useState("");
+  // const [skills, setSkills] = useState([]);
 
-  const addSkill = () => {
-    if (skillInput.trim()) {
-      setSkills([...skills, skillInput.trim()]);
-      setSkillInput("");
-    }
-  };
+  // const addSkill = () => {
+  //   if (skillInput.trim()) {
+  //     setSkills([...skills, skillInput.trim()]);
+  //     setSkillInput("");
+  //   }
+  // };
 
-  const removeSkill = (index) => {
-    const updatedSkills = skills.filter((_, i) => i !== index);
-    setSkills(updatedSkills);
-  };
+  // const removeSkill = (index) => {
+  //   const updatedSkills = skills.filter((_, i) => i !== index);
+  //   setSkills(updatedSkills);
+  // };
 
 
   const nevigate = useNavigate();
