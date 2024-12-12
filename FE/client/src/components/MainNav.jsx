@@ -38,6 +38,8 @@ function MainNavbar() {
             <img className="size-6" src={event} alt="event" srcset="" />
         </div> */}
 
+        <div >
+
             <img className="size-6" src={chat} alt="chat" srcset="" />
         </div>
         <Link to = "/discussionforum">

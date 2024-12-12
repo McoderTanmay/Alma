@@ -31,6 +31,20 @@ function Nav() {
   const [cnfpassword, setCnfpassword] = useState("");
   const [passDNM, setPassDNM] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [skillInput, setSkillInput] = useState("");
+  const [skills, setSkills] = useState([]);
+
+  const addSkill = () => {
+    if (skillInput.trim()) {
+      setSkills([...skills, skillInput.trim()]);
+      setSkillInput("");
+    }
+  };
+
+  const removeSkill = (index) => {
+    const updatedSkills = skills.filter((_, i) => i !== index);
+    setSkills(updatedSkills);
+  };
 
   const [skillInput, setSkillInput] = useState("");
   const [skills, setSkills] = useState([]);
@@ -181,6 +195,8 @@ function Nav() {
                             toward a career in public policy. Today, she works
                             as a policy analyst for a well-known NGO and is an
 
+
+
                             active speaker at forums, focusing on sustainable
                             development policies. She often returns to the
                             University to guide students about career options in
@@ -204,6 +220,11 @@ function Nav() {
                             Aludent for networking and job placement support.
                             Through the alumni network, he found a mentor who
                             helped him land a position at a leading financial
+
+                            firm. Vikram is now a financial analyst and
+                            frequently advises students at Maharaja College
+                            about pursuing careers in finance and investment.
+
 
                             firm.
                           </p>
@@ -268,6 +289,7 @@ function Nav() {
                             securing a top rank. Currently, she is an IAS
                             officer posted in Rajasthan, focusing on women
                             empowerment and rural development programs.
+
 
                           </p>
                         </div>
@@ -422,7 +444,9 @@ function Nav() {
                 </div>
               </div>
 
+
               <div className="mb-3">
+
 
                 <label
                   htmlFor="document"
@@ -437,9 +461,6 @@ function Nav() {
                   className="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500"
                 />
               </div>
-
-
-              
 
 
               <button
