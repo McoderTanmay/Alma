@@ -9,6 +9,7 @@ import {
 import MainLanding from "./pages/Landing/MainLanding";
 import Feed from "./pages/feed/Feed";
 import DiscussForum from "./pages/Discussion/DiscussionForum"
+import JobPortal from "./pages/job/JobPortal"
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
     path:"/discussionforum",
     element: <DiscussForum/>
   },
+  {
+    path:"/jobportal",
+    element: <JobPortal/>
+  },
+
 ]);
 
 function App() {
