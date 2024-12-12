@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
@@ -67,7 +66,7 @@ const alumniSchema = new Schema(
             message: { type: String },
         },
         verificationStatus: {
-            isVerified: { type: Boolean, default: false },
+            isVerified: { type: Boolean, default: true},
             verifiedBy: { type: String, default: null },
             verifiedDate: { type: Date },
             remarks: { type: String },
@@ -75,6 +74,10 @@ const alumniSchema = new Schema(
         verificationDocument: {
             documentURL: { type: String, default: null },
             uploadedDate: { type: Date },
+        },
+        skills: {
+            type: [String],
+            default: [],
         },
     }
 );

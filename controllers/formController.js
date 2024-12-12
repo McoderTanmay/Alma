@@ -1,10 +1,24 @@
 import Forum from '../model/forumModel.js';
 import Thread from '../model/threadModel.js';
+import alumni from '../model/alumniModel.js';
+import student from '../model/studentModel.js';
 
 const createForumThread = async (req, res) => {
     try {
         const { title, content, userType, tags } = req.body;
         const author = req.user.userId;
+
+        // Check if the user is verified
+        let user;
+        if (userType.toLowerCase() === 'alumni') {
+            user = await alumni.findById(author);
+        } else if (userType.toLowerCase() === 'student') {
+            user = await student.findById(author);
+        }
+
+        if (!user || !user.isVerified) {
+            return res.status(403).json({ message: 'You are not verified. You cannot create a thread.' });
+        }
 
         if (!title || !content || !author) {
             return res.status(400).json({ message: 'Title, content, and author are required.' });
@@ -41,6 +55,13 @@ const upvotePost = async (req, res) => {
             return res.status(404).json({ message: 'Post not found.' });
         }
 
+        // Check if the user is verified
+        const user = await (post.userType.toLowerCase() === 'alumni' ? alumni.findById(req.user.userId) : student.findById(req.user.userId));
+
+        if (!user || !user.isVerified) {
+            return res.status(403).json({ message: 'You are not verified. You cannot upvote this post.' });
+        }
+
         if (!post.upvotes.includes(req.user.userId)) {
             post.upvotes.push(req.user.userId);
         } else {
@@ -66,6 +87,18 @@ const createReplyThread = async (req, res) => {
         const { content, userType } = req.body;
         const author = req.user.userId;
         const forumId = req.params.id;
+
+        // Check if the user is verified
+        let user;
+        if (userType.toLowerCase() === 'alumni') {
+            user = await alumni.findById(author);
+        } else if (userType.toLowerCase() === 'student') {
+            user = await student.findById(author);
+        }
+
+        if (!user || !user.isVerified) {
+            return res.status(403).json({ message: 'You are not verified. You cannot create a reply.' });
+        }
 
         if (!content || !author || !forumId) {
             return res.status(400).json({ message: 'Content, author, and forumId are required.' });
@@ -107,6 +140,13 @@ const upvoteReplyThread = async (req, res) => {
 
         if (!thread) {
             return res.status(404).json({ message: 'Reply thread not found.' });
+        }
+
+        // Check if the user is verified
+        const user = await (thread.userType.toLowerCase() === 'alumni' ? alumni.findById(req.user.userId) : student.findById(req.user.userId));
+
+        if (!user || !user.isVerified) {
+            return res.status(403).json({ message: 'You are not verified. You cannot upvote this reply.' });
         }
 
         if (thread.upvotes.includes(req.user.userId)) {
