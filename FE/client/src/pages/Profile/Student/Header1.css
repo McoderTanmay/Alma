@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #175e67;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar input {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.nav-icons .icon {
+  width: 30px;
+  margin-left: 15px;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+  background-image: "C:/Users/91999/OneDrive/Desktop/react/demoshopapp/public/notification.png";
+  background-image: "C:/Users/91999/OneDrive/Desktop/react/demoshopapp/public/conversation.png";
+  background-image: "C:/Users/91999/OneDrive/Desktop/react/demoshopapp/public/Student1.png";
+  background-image: "C:/Users/91999/OneDrive/Desktop/react/demoshopapp/public/POWEROFF.png";
+}
+
+.nav-icons .icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
