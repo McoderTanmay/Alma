@@ -77,12 +77,19 @@ const profilePicUpload = async (req, res) => {
   const profilePicUrl = `C:/Users/shant/OneDrive/Desktop/JS p1/Alma/Backend/utils/profilePictures/${file.filename}`;
 
   try {
+    // Check if the user is verified
     const alumni = await Alumni.findById(userId);
     const student = await Student.findById(userId);
     const userType = alumni ? alumni.userType : student ? student.userType : null;
+    const isVerified = alumni ? alumni.isVerified : student ? student.isVerified : false;
 
     if (!userType) {
       return res.status(400).json({ code: 400, status: "Failed", message: "Invalid user type." });
+    }
+
+    // Check if the user is verified
+    if (!isVerified) {
+      return res.status(403).json({ code: 403, status: "Failed", message: "You are not verified. Profile picture upload denied." });
     }
 
     const Model = userType === "student" ? Student : Alumni;

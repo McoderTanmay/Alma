@@ -1,5 +1,14 @@
 import Chat from '../model/chatModel.js';
 import Message from '../model/messagesModel.js';
+import Alumni from '../model/alumniModel.js';
+import Student from '../model/studentModel.js';
+
+// Helper function to check if user is verified
+const isUserVerified = async (userId) => {
+    const alumni = await Alumni.findById(userId);
+    const student = await Student.findById(userId);
+    return alumni ? alumni.isVerified : student ? student.isVerified : false;
+};
 
 const createOrGetChat = async (req, res) => {
     try {
@@ -8,6 +17,12 @@ const createOrGetChat = async (req, res) => {
 
         if (!toUser) {
             return res.status(400).json({ message: 'Recipient user ID is required.' });
+        }
+
+        // Check if the user is verified
+        const isVerified = await isUserVerified(fromUser);
+        if (!isVerified) {
+            return res.status(403).json({ message: 'You are not verified. Chat creation denied.' });
         }
 
         let chat = await Chat.findOne({
@@ -29,6 +44,13 @@ const createOrGetChat = async (req, res) => {
 const getAllChats = async (req, res) => {
     try {
         const userId = req.user.userId;
+
+        // Check if the user is verified
+        const isVerified = await isUserVerified(userId);
+        if (!isVerified) {
+            return res.status(403).json({ message: 'You are not verified. Chat access denied.' });
+        }
+
         const chats = await Chat.find({ participants: userId })
             .populate('participants', 'FullName')
             .sort({ updatedAt: -1 });
@@ -48,6 +70,12 @@ const sendMessage = async (req, res) => {
 
         if (!message) {
             return res.status(400).json({ message: 'Message content is required.' });
+        }
+
+        // Check if the sender is verified
+        const isVerified = await isUserVerified(sender);
+        if (!isVerified) {
+            return res.status(403).json({ message: 'You are not verified. Message sending denied.' });
         }
 
         const newMessage = new Message({
@@ -75,6 +103,13 @@ const sendMessage = async (req, res) => {
 const getChatMessages = async (req, res) => {
     try {
         const { chatId } = req.params;
+
+        // Check if the user is verified
+        const isVerified = await isUserVerified(req.user.userId);
+        if (!isVerified) {
+            return res.status(403).json({ message: 'You are not verified. Cannot access chat messages.' });
+        }
+
         const messages = await Message.find({ chat: chatId })
             .populate('sender', 'FullName')
             .sort({ createdAt: 1 });
@@ -89,6 +124,13 @@ const getChatMessages = async (req, res) => {
 const markMessageAsRead = async (req, res) => {
     try {
         const { messageId } = req.params;
+
+        // Check if the user is verified
+        const isVerified = await isUserVerified(req.user.userId);
+        if (!isVerified) {
+            return res.status(403).json({ message: 'You are not verified. Cannot mark message as read.' });
+        }
+
         const updatedMessage = await Message.findByIdAndUpdate(
             messageId,
             { isRead: true },
