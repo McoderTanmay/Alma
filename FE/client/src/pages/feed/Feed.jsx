@@ -17,6 +17,18 @@ function Feed() {
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [showNotification, setShowNotification] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPosted, setIsPosted] = useState(false);
+  const [error, setError] = useState("");
+  const handleCreateJobClick = () => {
+    setIsModalOpen(true); /// open the modal
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // Close the modal
+    setError(""); // Reset any errors
+    setIsPosted(false); // Reset success message
+  };
   const handlemySubmit = () => {
     // Handle form submission logic here
     setShowNotification(true); // Show notification
@@ -31,7 +43,19 @@ function Feed() {
   const closehandelAiChatHandler = () => {
     setAiClicked(false);
   };
+  const handleConfirmClick = () => {
+    // Simulate form submission logic
+    const isValid = true; // Replace this with actual validation logic
 
+    if (isValid) {
+      setIsPosted(true);
+      setTimeout(() => {
+        setIsModalOpen(false); // Close the modal after success
+      }, 1500);
+    } else {
+      setError("Error: Please fill out all required fields!");
+    }
+  };
   const handleSubmit = async () => {
     if (!fromDate || !toDate) {
       alert("Please select both From and To dates");
@@ -107,6 +131,93 @@ function Feed() {
               <ChatBot onClose={closehandelAiChatHandler}></ChatBot>
             </aside>
           )}
+          {/* Create a Job Button */}
+          < aside className=" h-fit bg-blue-500 rounded-xl shadow-lg ms-10 mt-5">
+           
+      <div className="flex rounded-xl items-center bg-teal-500">
+        <button
+          className="w-full text-left py-2 px-4 rounded-lg text-white"
+          onClick={handleCreateJobClick}
+        >
+          Create a Job
+        </button>
+      </div>
+        {/* Modal */}
+    {isModalOpen && (
+      <div className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="job-form-container bg-white rounded-lg shadow-lg p-6 relative">
+          <div className="job-form-header flex justify-between items-center mb-4">
+            <h2 className="text-lg font-bold">Create a Job</h2>
+            <button
+              className="close-btn text-red-500 font-bold text-xl"
+              onClick={handleCloseModal}
+            >
+              ×
+            </button>
+          </div>
+          <div className="job-form-body w-[500px]">
+            <div className="form-field mb-4">
+              <label className="block font-bold mb-2">
+                <i className="icon">🧑‍💻</i> Position
+              </label>
+              <input
+                type="text"
+                placeholder="Enter position"
+                className="w-full p-2 border rounded-md"
+              />
+            </div>
+            <div className="form-field mb-4">
+              <label className="block font-bold mb-2">
+                <i className="icon">🏢</i> Company Name
+              </label>
+              <input
+                type="text"
+                placeholder="Enter company name"
+                className="w-full p-2 border rounded-md"
+              />
+            </div>
+            <div className="form-field mb-4">
+              <label className="block font-bold mb-2">
+                <i className="icon">💼</i> Job Type
+              </label>
+              <input
+                type="text"
+                placeholder="Enter job type"
+                className="w-full p-2 border rounded-md"
+              />
+            </div>
+            <div className="form-field mb-4">
+              <label className="block font-bold mb-2">
+                <i className="icon">📍</i> Location
+              </label>
+              <input
+                type="text"
+                placeholder="Enter location"
+                className="w-full p-2 border rounded-md"
+              />
+            </div>
+          </div>
+
+          <button
+            className="confirm-btn bg-teal-500 text-white py-2 px-4 rounded-md w-full"
+            onClick={handleConfirmClick}
+          >
+            Confirm
+          </button>
+
+          {isPosted && (
+            <div className="success-message text-green-500 mt-4">
+              Job Posted Successfully!
+            </div>
+          )}
+
+          {error && (
+            <div className="error-message text-red-500 mt-4">{error}</div>
+          )}
+        </div>
+      </div>
+    )}
+  </aside>
           <aside className=" h-fit bg-blue-500 rounded-xl shadow-lg ms-10 mt-5">
             <div className="flex rounded-xl items-center">
               <button
